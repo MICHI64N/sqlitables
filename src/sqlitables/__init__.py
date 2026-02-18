@@ -1,0 +1,1 @@
+from sqlitables import classes, connection

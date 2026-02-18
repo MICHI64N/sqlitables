@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sqlitables"
+version = "0.1.0"
+authors = [{name = "Samantha Bales", email = "samanthabales2006@gmail.com"}]
+description = "Create and maintain SQLite databases more efficiently using object-oriented concepts"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["sql", "sqlite", "database", "classes", "object-oriented", "oop"]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Programming Language :: Python :: 3",
+    "Topic :: Database",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+
+[project.urls]
+Repository = "https://github.com/MICHI64N/sqlitables"
+Changelog = "https://github.com/MICHI64N/sqlitables/blob/main/CHANGELOG.md"

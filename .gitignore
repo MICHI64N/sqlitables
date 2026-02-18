@@ -1,0 +1,5 @@
+# The natural consequence of working on MacOS
+.DS_Store
+
+# Cache
+__pycache__
