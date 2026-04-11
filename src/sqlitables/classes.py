@@ -21,6 +21,20 @@ class Table:
         sql = f'CREATE TABLE "{self.name}"( '
         for index, column in enumerate(self.columns):
             sql += column.statement()
-            if index != len(self.columns) - 1: ", "
-        sql += " );"
+            if index != len(self.columns) - 1: sql += ', '
+        sql += ');'
+        cursor.execute(sql)
+    def insert_into(self, values: list[tuple[str, int, None]], cursor: sqlite3.Cursor):
+        sql = f'INSERT INTO {self.name} VALUES '
+        for index, value in enumerate(values):
+            sql += '('
+            if type(value) == tuple:
+                for index, field in enumerate(value):
+                    sql += str(field)
+                    if index != len(value) - 1: sql += ', '
+            else:
+                sql += str(value)
+            sql += ')'
+            if index != len(values) - 1: sql += ', '
+        sql += ';'
         cursor.execute(sql)

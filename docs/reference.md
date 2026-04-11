@@ -45,3 +45,10 @@ Creates the table in the database
 * **Parameters**
     * `cursor`: *sqlite3.Cursor*; The cursor to navigate the database with
 * **Returns**: *This function does not return*
+
+#### `insert_into(self, values, cursor)`
+Inserts values into the table
+* **Parameters**
+    * `values`: *list[tuple[str, int, None]]*; The values to insert into the table
+    * `cursor`: *sqlite3.Cursor*; The cursor to navigate the database with
+* **Returns**: *This function does not return*
