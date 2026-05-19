@@ -21,9 +21,9 @@
     ```
 2. Create [classes.Column](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#classescolumn) objects; these columns will be used in the [classes.Table](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#classestable) object.
     ```py
-    example_col = classes.Column("Example", "TEXT")
-    example_col_2 = classes.Column("Example2", "TEXT")
-    example_col_3 = classes.Column("Example3", "TEXT")
+    example_col = classes.Column("Example", "TEXT", None)
+    example_col_2 = classes.Column("Example2", "TEXT", None)
+    example_col_3 = classes.Column("Example3", "TEXT", None)
     ```
 3. Create the [classes.Table](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#classestable) object—note that the table is not on the database at this point.
     ```py
