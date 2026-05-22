@@ -60,6 +60,6 @@ Creates the table in the database
 #### `insert_into(self, values, cursor)`
 Inserts values into the table
 * **Parameters**
-    * `values`: *list[tuple[str, int, None]]*; The values to insert into the table
+    * `values`: *list\[tuple\]*; The values to insert into the table
     * `cursor`: *sqlite3.Cursor*; The cursor to navigate the database with
 * **Returns**: *This function does not return*

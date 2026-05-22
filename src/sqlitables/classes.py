@@ -35,16 +35,16 @@ class Table:
             if index != len(self.columns) - 1: sql += ', '
         sql += ');'
         cursor.execute(sql)
-    def insert_into(self, values: list[tuple[str, int, None]], cursor: sqlite3.Cursor):
+    def insert_into(self, values: list[tuple], cursor: sqlite3.Cursor):
         sql = f'INSERT INTO "{self.name}" VALUES '
-        for index, value in enumerate(values):
+        for index, value in enumerate(values): # enumerate list
             sql += '('
-            if type(value) == tuple:
-                for index, field in enumerate(value):
+            for tupleindex, field in enumerate(value): # enumerate tuple
+                if type(field) == str:
+                    sql += f'"{field}"'
+                else:
                     sql += str(field)
-                    if index != len(value) - 1: sql += ', '
-            else:
-                sql += str(value)
+                if tupleindex != len(value) - 1: sql += ', '
             sql += ')'
             if index != len(values) - 1: sql += ', '
         sql += ';'
