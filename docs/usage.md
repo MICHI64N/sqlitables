@@ -1,4 +1,5 @@
 # Usage
+
 ## Connect to the Database
 ### Prerequisites
 * None
@@ -11,6 +12,7 @@
     ```py
     connection, cursor = connection.connect("/Users/foo/Documents/example.db")
     ```
+
 ## Create a Table in the Database
 ### Prerequisites
 * [Connect to the database](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#connect-to-the-database)
@@ -19,9 +21,9 @@
     ```py
     from sqlitables import classes
     ```
-2. Create [classes.Column](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#classescolumn) objects; these columns will be used in the [classes.Table](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#classestable) object.
+2. Create [classes.Column](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#classescolumn) objects by filling their name, datatype, and (optionally) constraints; these columns will be used in the [classes.Table](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#classestable) object.
     ```py
-    example_col = classes.Column("Example", "TEXT", None)
+    example_col = classes.Column("Example1", "TEXT", None)
     example_col_2 = classes.Column("Example2", "TEXT", None)
     example_col_3 = classes.Column("Example3", "TEXT", None)
     ```
@@ -39,12 +41,13 @@
     ```py
     example_table.create(cursor)
     ```
+
 ## Insert Values Into a Table
 ### Prerequisites
 * [Connect to the database](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#connect-to-the-database)
 * [Create a table in the database](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#create-a-table-in-the-database)
 ### Usage
-1. Insert the values using [classes.Table.insert_into()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md##insert_intoself-values-cursor) according to the number and data type of the table's columns. One tuple is one row.
+1. Insert the values using [classes.Table.insert()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#insertself-values-connection) according to the number, data type, and constraints of the table's columns. One tuple is one row.
     ```py
-    example_table.insert_into([('Field1','Field2','Field3'), ('Field4','Field5','Field6')], cursor)
+    example_table.insert([('Field1','Field2','Field3'), ('Field4','Field5','Field6')], connection)
     ```

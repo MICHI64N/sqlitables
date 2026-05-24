@@ -35,7 +35,7 @@ class Table:
             if index != len(self.columns) - 1: sql += ', '
         sql += ');'
         cursor.execute(sql)
-    def insert_into(self, values: list[tuple], connection: sqlite3.Connection):
+    def insert(self, values: list[tuple], connection: sqlite3.Connection):
         sql = f'INSERT INTO "{self.name}" VALUES '
         for index, value in enumerate(values): # enumerate list
             sql += '('
