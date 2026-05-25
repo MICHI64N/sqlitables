@@ -1,0 +1,25 @@
+name: Test PyPI Distribution
+
+on: workflow_dispatch
+
+jobs:
+  pypi-build:
+    uses: ./.github/workflows/pypi-build.yml
+  pypi-upload:
+    runs-on: ubuntu-latest
+    needs: pypi-build
+    environment:
+      name: testpypi
+      url: ${{ vars.URL }}
+    permissions:
+      id-token: write
+    steps:
+      - name: Download Distribution
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.pypi-build.outputs.distribution-name }}
+          path: ${{ needs.pypi-build.outputs.distribution-path }}
+      - name: Upload Distribution to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
