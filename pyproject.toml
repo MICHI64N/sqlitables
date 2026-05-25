@@ -9,7 +9,7 @@ requires-python = ">=3.11"
 authors = [{name = "Samantha Bales", email = "samanthabales2006@gmail.com"}]
 description = "Create and maintain SQLite databases more efficiently using object-oriented concepts"
 readme = "README.md"
-license = "MIT License"
+license = "MIT"
 license-files = ["LICENSE"]
 keywords = ["sql", "sqlite", "database", "classes", "object-oriented", "oop"]
 classifiers = [
