@@ -8,7 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-The initial release.
+* The following features:
+    * Connect to the database ([usage](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#connect-to-the-database)).
+    * Create a table in the database ([usage](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#create-a-table-in-the-database)).
+    * Insert values into a table ([usage](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#insert-values-into-a-table)).
+    * Select values from a table ([usage](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#select-values-from-a-table)).
 * Package files @ src/sqlitables/  
     * \_\_init\_\_.py
     * classes.py

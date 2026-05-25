@@ -63,3 +63,12 @@ Inserts values into the table
     * `values`: *list\[tuple\]*; The values to insert into the table
     * `connection`: *sqlite3.Connection*; The connection to the database
 * **Returns**: *This function does not return*
+
+#### `select(self, select, where, cursor)`
+Selects values from the table
+* **Parameters**
+    * `select`: *list[classes.Column], "\*"*; The columns to select from
+    * `where`: *string, none*; The where clause filtering which values to select
+    * `cursor`: *sqlite3.Cursor*; The cursor to navigate the database with
+* **Returns**
+    * `selection`: *list*; The selected values

@@ -51,3 +51,18 @@
     ```py
     example_table.insert([('Field1','Field2','Field3'), ('Field4','Field5','Field6')], connection)
     ```
+
+## Select Values From a Table
+### Prerequisites
+* [Connect to the database](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#connect-to-the-database)
+* [Create a table in the database](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#create-a-table-in-the-database)
+* [Insert Values Into a Table](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#insert-values-into-a-table)
+### Usage
+1. Select the values using [classes.Table.select()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#selectself-select-where-cursor) by specifying the columns to select from. To select all columns, use "\*". Optionally, a where clause can be used to filter the selected values. Save this with a variable for the next step.
+    ```py
+    selection = example_table.select([Example1, Example2], None, cursor)
+    ```
+2. Print the results to view the selection.
+    ```py
+    print selection
+    ```
