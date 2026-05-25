@@ -9,25 +9,14 @@ Connects to the database
     * `cursor`: *sqlite3.Cursor*; The cursor to navigate the database with
 
 ## Classes
-### `classes.ColumnConstraint`
-#### `__init__(self, name, value)`
-* **Parameters**
-    * `name`: *string*; The name of the constraint
-    * `value`: *string, none*; The value of the constraint
-* **Returns**
-    * `self.name`: Instance "name" attribute
-    * `self.value`: Instance "value" attribute
-
 ### `classes.Column`
-#### `__init__(self, name, datatype, constraints)`
+#### `__init__(self, name, datatype)`
 * **Parameters**
     * `name`: *string*; The name of the column
     * `datatype`: *string*; The datatype of the column
-    * `constraints`: *list\[classes.ColumnConstraint\], none*; The constraints of the column
 * **Returns**
     * `self.name`: *string*; Instance "name" attribute
     * `self.datatype` *string*; Instance "datatype" attribute
-    * `self.constraints`: *list\[classes.ColumnConstraint\], none*; Instance "constraints" attribute
 
 #### `statement(self)`
 Creates a statement that can be applied to the creation of tables

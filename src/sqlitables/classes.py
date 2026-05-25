@@ -1,22 +1,11 @@
 import sqlite3
 
-class ColumnConstraint:
-    def __init__(self, name: str, value: str | None):
-        self.name = name
-        self.value = value
-
 class Column:
-    def __init__(self, name: str, datatype: str, constraints: list[ColumnConstraint] | None):
+    def __init__(self, name: str, datatype: str):
         self.name = name
         self.datatype = datatype
-        self.constraints = constraints
     def statement(self):
         statement = f'"{self.name}" {self.datatype}'
-        if self.constraints:
-            for constraint in self.constraints:
-                statement += f' {constraint.name}'
-                if constraint.value:
-                    statement += f' {constraint.value}'
         return statement
 
 class Table:
