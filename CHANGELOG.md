@@ -5,10 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.1.1] - 2026-05-27
 
 ### Added
 * Simple installation documentation in README.md.
+* The addition of GitHub Actions files to last version's CHANGELOG.md entry.
+
+### Changed
+* Updated GitHub Actions versions to upload to PyPI without errors.
+
+### Fixed
+* Added quotes around the table name statements in the `classes.Table.select()` method.
 
 ## [0.1.0] - 2026-05-25
 
@@ -31,6 +38,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     * CHANGELOG.md
     * LICENSE
     * .gitignore
+* GitHub Actions files @ .github/workflows/
+    * pypi-build.yml
+    * pypi-publish.yml
+    * pypi-test.yml
 
-[Unreleased]: https://github.com/MICHI64N/sqlitables/compare/v0.1.0...HEAD
+[0.1.1]: https://github.com/MICHI64N/sqlitables/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/MICHI64N/sqlitables/releases/tag/v0.1.0
