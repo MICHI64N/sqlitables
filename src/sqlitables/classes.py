@@ -43,14 +43,14 @@ class Table:
         sql = 'SELECT '
         if type(select) == str:
             if select == "*":
-                sql += f'* FROM {self.name}'
+                sql += f'* FROM "{self.name}"'
             else:
                 raise ValueError('The select parameter can only include a list of Column objects or "*".')
         else:
             for index, col in enumerate(select):
                 sql += f'"{col.name}"' # type: ignore ;; reads col a possible string when it is not.
                 if index != len(select) - 1: sql += ', '
-            sql += f' FROM {self.name}'
+            sql += f' FROM "{self.name}"'
         if where:
             sql += f' WHERE {where}'
         sql += ";"
