@@ -1,24 +1,31 @@
 import sqlite3
+import re
 
 class Column:
     def __init__(self, name: str, datatype: str):
         self.name = name
         self.datatype = datatype
         self.constraints = []
-    def constraint(self, constraint: str, value: str | int | None):
+    def constraint(self, constraint: str, value: str | int | float | None):
         valid_constraints = ["check", "collate", "default", "not null", "primary key", "unique"]
         if constraint.lower() in valid_constraints:
             self.constraints.append((constraint, value))
+    def _value_constraint_definition(self, value):
+        definition = ""
+        if type(value) == str and not re.match(r'^\(.+\)$', value): # escapes strings and parses expressions
+            definition += f'"{value}"'
+        else:
+            definition += f'{value}'
+        return definition
+    def _constraint_definition(self, constraint, value):
+        definition = f'{constraint}' # constraint name
+        if value: # if the constraint has a value
+            definition += f' {self._value_constraint_definition(value)}'
     def definition(self): # This definition is used for table creation
         definition = f'"{self.name}" {self.datatype}'
         if len(self.constraints) >= 1:
             for constraint in self.constraints:
-                definition += f' {constraint[0]}' # constraint name
-                if constraint[1]: # if the constraint has a value
-                    if type(constraint[1]) == str:
-                        definition += f' "{constraint[1]}"'
-                    else:
-                        definition += f' {constraint[1]}'
+                definition += f' {self._constraint_definition(constraint[0], constraint[1])}'
         return definition
 
 class Table:

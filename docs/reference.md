@@ -19,11 +19,11 @@ Connects to the database
     * `self.datatype` *string*; Instance "datatype" attribute
     * `self.constraints` *list*; Instance "constraints" attribute (empty list by default)
 
-#### `constraints(self, constraint, value)`
+#### `constraint(self, constraint, value)`
 Adds a constraint to the instances's self.constraints attribute.
 * **Parameters**:
     * `constraint`: *string*; A constraint to apply (only accepts "CHECK", "COLLATE", "DEFAULT", "PRIMARY KEY", "NOT NULL", and "UNIQUE" case-insensitive)
-    * `value`: *string, integer, None*; A value to apply to the constraint
+    * `value`: *string, integer, float, None*; A value to apply to the constraint
 * **Returns**
     * `self.constraints`: *list[string]*; Updated instance "constraints" attribute
 
