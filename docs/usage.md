@@ -57,6 +57,10 @@
     ```py
     example_table.insert([('Field1','Field2','Field3'), ('Field4','Field5','Field6')], connection)
     ```
+    * Insert a null value into the table by typing "NULL" (case-insensitive) in a string.
+        ```py
+        example_table.insert([('Field7', 'Field8', 'NULL')], connection)
+        ```
 
 ## Select Values From a Table
 ### Prerequisites
