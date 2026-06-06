@@ -10,22 +10,22 @@ class Column:
         valid_constraints = ["check", "collate", "default", "not null", "primary key", "unique"]
         if constraint.lower() in valid_constraints:
             self.constraints.append((constraint, value))
-    def _value_constraint_definition(self, value):
+    def _definition_constraint_value(self, value):
         definition = ""
         if type(value) == str and not re.match(r'^\(.+\)$', value): # escapes strings and parses expressions
             definition += f'"{value}"'
         else:
             definition += f'{value}'
         return definition
-    def _constraint_definition(self, constraint, value):
+    def _definition_constraint(self, constraint, value):
         definition = f'{constraint}' # constraint name
         if value: # if the constraint has a value
-            definition += f' {self._value_constraint_definition(value)}'
+            definition += f' {self._definition_constraint_value(value)}'
     def definition(self): # This definition is used for table creation
         definition = f'"{self.name}" {self.datatype}'
         if len(self.constraints) >= 1:
             for constraint in self.constraints:
-                definition += f' {self._constraint_definition(constraint[0], constraint[1])}'
+                definition += f' {self._definition_constraint(constraint[0], constraint[1])}'
         return definition
 
 class Table:
@@ -44,35 +44,52 @@ class Table:
             if index != len(self.columns) - 1: sql += ', '
         sql += ');'
         cursor.execute(sql)
+    def _insert_column(self, field: str):
+        if type(field) == str:
+            sql = f'"{field}"'
+        else:
+            sql = str(field)
+        return sql
+    def _insert_one(self, value: tuple):
+        sql = '('
+        for index, field in enumerate(value): # enumerate tuple
+            sql += self._insert_column(field)
+            if index != len(value) - 1: sql += ', '
+        sql += ')'
+        return sql
     def insert(self, values: list[tuple], connection: sqlite3.Connection):
         sql = f'INSERT INTO "{self.name}" VALUES '
         for index, value in enumerate(values): # enumerate list
-            sql += '('
-            for tupleindex, field in enumerate(value): # enumerate tuple
-                if type(field) == str:
-                    sql += f'"{field}"'
-                else:
-                    sql += str(field)
-                if tupleindex != len(value) - 1: sql += ', '
-            sql += ')'
+            sql += self._insert_one(value)
             if index != len(values) - 1: sql += ', '
         sql += ';'
         connection.cursor().execute(sql).close()
         connection.commit()
+    def _select_str(self, select: str):
+        if select == "*":
+            sql = f'*'
+            return sql
+        else:
+            raise ValueError('The select parameter can only include a list of Column objects or "*".')
+    def _select_columns(self, select: list[Column]):
+        sql = ''
+        for index, col in enumerate(select):
+            sql += f'"{col.name}"' 
+            if index != len(select) - 1: sql += ', '
+        return sql
     def select(self, select: list[Column] | str, where: str | None, cursor: sqlite3.Cursor):
+        # SELECT [select]
         sql = 'SELECT '
         if type(select) == str:
-            if select == "*":
-                sql += f'* FROM "{self.name}"'
-            else:
-                raise ValueError('The select parameter can only include a list of Column objects or "*".')
+            sql += self._select_str(select)
         else:
-            for index, col in enumerate(select):
-                sql += f'"{col.name}"' # type: ignore ;; reads col a possible string when it is not.
-                if index != len(select) - 1: sql += ', '
-            sql += f' FROM "{self.name}"'
+            sql += self._select_columns(select) # type: ignore ;; reads col a possible string when it is not.
+        # FROM table
+        sql += f' FROM "{self.name}"'
+        # WHERE [where]
         if where:
             sql += f' WHERE {where}'
         sql += ";"
+        # Selection
         selection = cursor.execute(sql)
         return selection.fetchall()
