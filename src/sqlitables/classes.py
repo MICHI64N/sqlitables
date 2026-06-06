@@ -6,10 +6,12 @@ class Column:
         self.name = name
         self.datatype = datatype
         self.constraints = []
+
     def constraint(self, constraint: str, value: str | int | float | None):
         valid_constraints = ["check", "collate", "default", "not null", "primary key", "unique"]
         if constraint.lower() in valid_constraints:
             self.constraints.append((constraint, value))
+
     def _definition_constraint_value(self, value):
         definition = ""
         if type(value) == str and not re.match(r'^\(.+\)$', value): # escapes strings and parses expressions
@@ -19,8 +21,9 @@ class Column:
         return definition
     def _definition_constraint(self, constraint, value):
         definition = f'{constraint}' # constraint name
-        if value: # if the constraint has a value
+        if value:
             definition += f' {self._definition_constraint_value(value)}'
+        return definition
     def definition(self): # This definition is used for table creation
         definition = f'"{self.name}" {self.datatype}'
         if len(self.constraints) >= 1:
@@ -32,11 +35,13 @@ class Table:
     def __init__(self, name: str, columns: list[Column]):
         self.name = name
         self.columns = columns
+
     def exists(self, cursor: sqlite3.Cursor):
         sql = f'SELECT name FROM sqlite_master WHERE type="table" AND name="{self.name}";'
         find = cursor.execute(sql)
         exists = True if find.fetchone() else False
         return exists
+    
     def create(self, cursor: sqlite3.Cursor):
         sql = f'CREATE TABLE "{self.name}"( '
         for index, column in enumerate(self.columns):
@@ -44,9 +49,12 @@ class Table:
             if index != len(self.columns) - 1: sql += ', '
         sql += ');'
         cursor.execute(sql)
+
     def _insert_column(self, field: str):
         if type(field) == str:
             sql = f'"{field}"'
+            if field.lower() == "null":
+                sql = 'NULL'
         else:
             sql = str(field)
         return sql
@@ -65,6 +73,7 @@ class Table:
         sql += ';'
         connection.cursor().execute(sql).close()
         connection.commit()
+
     def _select_str(self, select: str):
         if select == "*":
             sql = f'*'
