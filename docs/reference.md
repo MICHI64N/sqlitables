@@ -58,6 +58,7 @@ Creates the table in the database
 #### `insert(self, values, connection)`
 Inserts values into the table
 * **Parameters**
+    * `columns`: *list\[classes.Column\] | None*; The columns being inserted into (None inserts into the entire table)
     * `values`: *list\[tuple\]*; The values to insert into the table
     * `connection`: *sqlite3.Connection*; The connection to the database
 * **Returns**: *This function does not return*

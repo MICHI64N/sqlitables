@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 * NULL can now be inserted into a table by typing "NULL" (case-insensitive) in a string.
+* One-element tuples can now be inserted into a table.
 
 ## [0.1.1] - 2026-05-27
 

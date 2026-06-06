@@ -49,7 +49,14 @@ class Table:
             if index != len(self.columns) - 1: sql += ', '
         sql += ');'
         cursor.execute(sql)
-
+        
+    def _insert_into_columns(self, columns: list[Column]):
+        sql = f'"{self.name}"('
+        for index, column in enumerate(columns):
+            sql += f'"{column.name}"'
+            if index != len(columns) - 1: sql += ', '
+        sql += ')'
+        return sql
     def _insert_column(self, field: str):
         if type(field) == str:
             sql = f'"{field}"'
@@ -60,13 +67,21 @@ class Table:
         return sql
     def _insert_one(self, value: tuple):
         sql = '('
-        for index, field in enumerate(value): # enumerate tuple
-            sql += self._insert_column(field)
-            if index != len(value) - 1: sql += ', '
+        if len(value) == 2 and not value[1]:
+            sql += self._insert_column(value[0])
+        else:
+            for index, field in enumerate(value): # enumerate tuple
+                sql += self._insert_column(field)
+                if index != len(value) - 1: sql += ', '
         sql += ')'
         return sql
-    def insert(self, values: list[tuple], connection: sqlite3.Connection):
-        sql = f'INSERT INTO "{self.name}" VALUES '
+    def insert(self, columns: list[Column] | None, values: list[tuple], connection: sqlite3.Connection):
+        sql = f'INSERT INTO'
+        if columns:
+            sql += f' {self._insert_into_columns(columns)}'
+        else:
+            sql += f' "{self.name}"'
+        sql += f' VALUES '
         for index, value in enumerate(values): # enumerate list
             sql += self._insert_one(value)
             if index != len(values) - 1: sql += ', '
