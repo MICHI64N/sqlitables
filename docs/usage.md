@@ -23,21 +23,27 @@
     ```
 2. Create [classes.Column](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#classescolumn) objects by filling their name and datatype. These columns will be used in the [classes.Table](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#classestable) object.
     ```py
-    example_col = classes.Column("Example1", "TEXT")
+    example_col_1 = classes.Column("Example1", "TEXT")
     example_col_2 = classes.Column("Example2", "TEXT")
     example_col_3 = classes.Column("Example3", "TEXT")
     ```
-3. Create the [classes.Table](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#classestable) object—note that the table is not on the database at this point.
+3. *Optional*: Add constraints to the columns by using the [classes.Column.constraint()].
     ```py
-    example_table_cols = [example_col, example_col_2, example_col_3]
+    example_col_1.constraint("NOT NULL", None)
+    example_col_1.constraint("UNIQUE", None)
+    example_col_2.constraint("DEFAULT", "Two")
+    ```
+4. Create the [classes.Table](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#classestable) object—note that the table is not on the database at this point.
+    ```py
+    example_table_cols = [example_col_1, example_col_2, example_col_3]
     example_table = classes.Table("Example", example_table_cols)
     ```
-4. *Optional*: check if the table exists on the database using [classes.Table.exists()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#existsself-cursor).
+5. *Optional*: check if the table exists on the database using [classes.Table.exists()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#existsself-cursor).
     ```py
     exists = example_table.exists(cursor)
     print(exists)
     ```
-5. Create the table on the database if it does not already exist using [classes.Table.create()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#createself-cursor).
+6. Create the table on the database if it does not already exist using [classes.Table.create()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#createself-cursor).
     ```py
     example_table.create(cursor)
     ```

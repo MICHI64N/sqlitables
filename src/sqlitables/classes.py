@@ -4,9 +4,22 @@ class Column:
     def __init__(self, name: str, datatype: str):
         self.name = name
         self.datatype = datatype
-    def statement(self):
-        statement = f'"{self.name}" {self.datatype}'
-        return statement
+        self.constraints = []
+    def constraint(self, constraint: str, value: str | int | None):
+        valid_constraints = ["check", "collate", "default", "not null", "primary key", "unique"]
+        if constraint.lower() in valid_constraints:
+            self.constraints.append((constraint, value))
+    def definition(self): # This definition is used for table creation
+        definition = f'"{self.name}" {self.datatype}'
+        if len(self.constraints) >= 1:
+            for constraint in self.constraints:
+                definition += f' {constraint[0]}' # constraint name
+                if constraint[1]: # if the constraint has a value
+                    if type(constraint[1]) == str:
+                        definition += f' "{constraint[1]}"'
+                    else:
+                        definition += f' {constraint[1]}'
+        return definition
 
 class Table:
     def __init__(self, name: str, columns: list[Column]):
@@ -20,7 +33,7 @@ class Table:
     def create(self, cursor: sqlite3.Cursor):
         sql = f'CREATE TABLE "{self.name}"( '
         for index, column in enumerate(self.columns):
-            sql += column.statement()
+            sql += column.definition()
             if index != len(self.columns) - 1: sql += ', '
         sql += ');'
         cursor.execute(sql)

@@ -17,12 +17,21 @@ Connects to the database
 * **Returns**
     * `self.name`: *string*; Instance "name" attribute
     * `self.datatype` *string*; Instance "datatype" attribute
+    * `self.constraints` *list*; Instance "constraints" attribute (empty list by default)
 
-#### `statement(self)`
-Creates a statement that can be applied to the creation of tables
+#### `constraints(self, constraint, value)`
+Adds a constraint to the instances's self.constraints attribute.
+* **Parameters**:
+    * `constraint`: *string*; A constraint to apply (only accepts "CHECK", "COLLATE", "DEFAULT", "PRIMARY KEY", "NOT NULL", and "UNIQUE" case-insensitive)
+    * `value`: *string, integer, None*; A value to apply to the constraint
+* **Returns**
+    * `self.constraints`: *list[string]*; Updated instance "constraints" attribute
+
+#### `definition(self)`
+Creates a definition that can be applied to the creation of tables
 * **Parameters**: *There are no parameters for this function*
 * **Returns**
-    * `statement`: *string*; A statement that can be applied to the creation of tables
+    * `definition`: *string*; A definition that can be applied to the creation of tables
 
 ### `classes.Table`
 #### `__init__(self, name, columns)`
@@ -56,7 +65,7 @@ Inserts values into the table
 #### `select(self, select, where, cursor)`
 Selects values from the table
 * **Parameters**
-    * `select`: *list[classes.Column], "\*"*; The columns to select from
+    * `select`: *list[classes.Column], string*; The columns to select from (the only string value accepted is "\*")
     * `where`: *string, none*; The where clause filtering which values to select
     * `cursor`: *sqlite3.Cursor*; The cursor to navigate the database with
 * **Returns**
