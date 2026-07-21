@@ -71,3 +71,11 @@ Selects values from the table
     * `cursor`: *sqlite3.Cursor*; The cursor to navigate the database with
 * **Returns**
     * `selection`: *list*; The selected values
+
+#### `update(self, set, where, connection)`
+Updates values in the table
+* **Parameters**
+    * `set`: *string*; The value clause to update with
+    * `where`: *string, none*; The where clause filtering which values to update
+    * `connection`: *sqlite3.Connection*; The connection to the database
+* **Returns**: *This function does not return*

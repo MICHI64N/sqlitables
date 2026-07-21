@@ -66,7 +66,7 @@
 ### Prerequisites
 * [Connect to the database](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#connect-to-the-database)
 * [Create a table in the database](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#create-a-table-in-the-database)
-* [Insert Values Into a Table](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#insert-values-into-a-table)
+* [Insert values into a table](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#insert-values-into-a-table)
 ### Usage
 1. Select the values using [classes.Table.select()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#selectself-select-where-cursor) by specifying the columns to select from. To select all columns, use "\*". Optionally, a where clause can be used to filter the selected values. Save this with a variable for the next step.
     ```py
@@ -75,4 +75,15 @@
 2. Print the results to view the selection.
     ```py
     print selection
+    ```
+
+## Update Values in a Table
+### Prerequisites
+* [Connect to the database](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#connect-to-the-database)
+* [Create a table in the database](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#create-a-table-in-the-database)
+* [Insert values into a table](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#insert-values-into-a-table)
+### Usage
+1. Update the values using [classes.Table.update()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#updateself-set-where-connection) by specifying the value to update with. Optionally, a where clause can be used to filter where the value is updated.
+    ```py
+    example_table.update("Example1 = 'Updated TEXT'", None, connection)
     ```

@@ -57,7 +57,7 @@ class Table:
             if index != len(columns) - 1: sql += ', '
         sql += ')'
         return sql
-    def _insert_column(self, field: str):
+    def _insert_column(self, field: str | int | float):
         if type(field) == str:
             sql = f'"{field}"'
             if field.lower() == "null":
@@ -117,3 +117,12 @@ class Table:
         # Selection
         selection = cursor.execute(sql)
         return selection.fetchall()
+
+    def update(self, set: str, where: str | None, connection: sqlite3.Connection):
+        sql = f'UPDATE "{self.name}" SET '
+        sql += set
+        if where:
+            sql += f' WHERE {where}'
+        sql += ";"
+        connection.cursor().execute(sql).close()
+        connection.commit()

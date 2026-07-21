@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 * Column instances now have a constraints list that is applied to its definition.
+* Table values can now be updated.
 
 ### Changed
 * Renamed column method "statement" to "definition" to better fit SQLite terminology.
