@@ -35,12 +35,6 @@ class Table:
     def __init__(self, name: str, columns: list[Column]):
         self.name = name
         self.columns = columns
-
-    def exists(self, cursor: sqlite3.Cursor):
-        sql = f'SELECT name FROM sqlite_master WHERE type="table" AND name="{self.name}";'
-        find = cursor.execute(sql)
-        exists = True if find.fetchone() else False
-        return exists
     
     def create(self, cursor: sqlite3.Cursor):
         sql = f'CREATE TABLE "{self.name}"( '
@@ -49,6 +43,25 @@ class Table:
             if index != len(self.columns) - 1: sql += ', '
         sql += ');'
         cursor.execute(sql)
+
+    def delete(self, where: str | None, connection: sqlite3.Connection):
+        sql = f'DELETE FROM "{self.name}"'
+        if where:
+            sql += f' WHERE {where}'
+        sql += ";"
+        connection.cursor().execute(sql).close()
+        connection.commit()
+
+    def drop(self, connection: sqlite3.Connection):
+        sql = f'DROP TABLE IF EXISTS "{self.name}";'
+        connection.cursor().execute(sql).close()
+        connection.commit()
+
+    def exists(self, cursor: sqlite3.Cursor):
+        sql = f'SELECT name FROM sqlite_master WHERE type="table" AND name="{self.name}";'
+        find = cursor.execute(sql)
+        exists = True if find.fetchone() else False
+        return exists
         
     def _insert_into_columns(self, columns: list[Column]):
         sql = f'"{self.name}"('

@@ -87,3 +87,24 @@
     ```py
     example_table.update("Example1 = 'Updated TEXT'", None, connection)
     ```
+
+## Delete Rows from a Table
+### Prerequisites
+* [Connect to the database](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#connect-to-the-database)
+* [Create a table in the database](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#create-a-table-in-the-database)
+* [Insert values into a table](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#insert-values-into-a-table)
+### Usage
+1. Delete rows using [classes.Table.delete()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#deleteself-where-connection). Optionally, a where clause can be used to filter what rows to delete.
+    ```py
+    example_table.delete(None, connection)
+    ```
+
+## Drop a Table from the Database
+### Prerequisites
+* [Connect to the database](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#connect-to-the-database)
+* [Create a table in the database](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#create-a-table-in-the-database)
+### Usage
+1. Drop a table from the database using [classes.Table.drop()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#dropself-connection).
+    ```py
+    example_table.drop(connection)
+    ```

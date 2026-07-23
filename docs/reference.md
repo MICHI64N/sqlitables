@@ -42,18 +42,31 @@ Creates a definition that can be applied to the creation of tables
     * `self.name`: *string*; Instance "name" attribute
     * `self.columns`: *list\[classes.Column\]*; Instance "columns" attribute
 
+#### `create(self, cursor)`
+Creates the table in the database
+* **Parameters**
+    * `cursor`: *sqlite3.Cursor*; The cursor to navigate the database with
+* **Returns**: *This function does not return*
+
+#### `delete(self, where, connection)`
+Deletes rows from the table
+* **Parameters**
+    * `where`: *string, none*; The where clause filtering which rows to delete
+    * `connection`: *sqlite3.Connection*; The connection to the database
+* **Returns**: *This function does not return*
+
+#### `drop(self, connection)`
+Drops the table from the database
+* **Parameters**
+    * `connection`: *sqlite3.Connection*; The connection to the database
+* **Returns**: *This function does not return*
+
 #### `exists(self, cursor)`
 Checks whether the table exists in the database
 * **Parameters**
     * `cursor`: *sqlite3.Cursor*; The cursor to navigate the database with
 * **Returns**
     * `exists`: *boolean*; The answer to whether the table exists in the database
-
-#### `create(self, cursor)`
-Creates the table in the database
-* **Parameters**
-    * `cursor`: *sqlite3.Cursor*; The cursor to navigate the database with
-* **Returns**: *This function does not return*
 
 #### `insert(self, values, connection)`
 Inserts values into the table
