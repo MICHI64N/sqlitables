@@ -8,11 +8,3 @@ This library is available through PyPI, simplifying the installation process. Fi
 ```
 pip install sqlitables
 ``` 
-
-## Features
-*This is an early-stage project with limited features.*
-* Connect to the database ([usage](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#connect-to-the-database)).
-* Create a table in the database ([usage](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#create-a-table-in-the-database)).
-* Insert values into a table ([usage](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#insert-values-into-a-table)).
-* Select values from a table ([usage](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#select-values-from-a-table)).
-* Update values in a table ([usage](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#update-values-in-a-table)).

@@ -8,9 +8,9 @@
     ```py
     from sqlitables import connection
     ```
-2. Connect to the database using [connection.connect()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#connectionconnectfile_path) using a file path compatible with your system. The connection and associated cursor are required for many of the features in the library. A database is created at the file path if it does not already exist.
+2. Connect to the database using [connection.connect()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#connectionconnectfile_path) using a file path compatible with your system. The connection is required for many of the features in the library. A database is created at the file path if it does not already exist.
     ```py
-    connection, cursor = connection.connect("/Users/foo/Documents/example.db")
+    connection = connection.connect("/Users/foo/Documents/example.db")
     ```
 
 ## Create a Table in the Database
@@ -38,14 +38,14 @@
     example_table_cols = [example_col_1, example_col_2, example_col_3]
     example_table = classes.Table("Example", example_table_cols)
     ```
-5. *Optional*: check if the table exists on the database using [classes.Table.exists()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#existsself-cursor).
+5. *Optional*: check if the table exists on the database using [classes.Table.exists()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#existsself-connection).
     ```py
-    exists = example_table.exists(cursor)
+    exists = example_table.exists(connection)
     print(exists)
     ```
-6. Create the table on the database if it does not already exist using [classes.Table.create()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#createself-cursor).
+6. Create the table on the database if it does not already exist using [classes.Table.create()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#createself-connection).
     ```py
-    example_table.create(cursor)
+    example_table.create(connection)
     ```
 
 ## Insert Values Into a Table
@@ -68,9 +68,9 @@
 * [Create a table in the database](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#create-a-table-in-the-database)
 * [Insert values into a table](https://github.com/MICHI64N/sqlitables/blob/main/docs/usage.md#insert-values-into-a-table)
 ### Usage
-1. Select the values using [classes.Table.select()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#selectself-select-where-cursor) by specifying the columns to select from. To select all columns, use "\*". Optionally, a where clause can be used to filter the selected values. Save this with a variable for the next step.
+1. Select the values using [classes.Table.select()](https://github.com/MICHI64N/sqlitables/blob/main/docs/reference.md#selectself-select-where-connection) by specifying the columns to select from. To select all columns, use "\*". Optionally, a where clause can be used to filter the selected values. Save this with a variable for the next step.
     ```py
-    selection = example_table.select([Example1, Example2], None, cursor)
+    selection = example_table.select([Example1, Example2], None, connection)
     ```
 2. Print the results to view the selection.
     ```py

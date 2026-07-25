@@ -13,10 +13,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 * Renamed column method "statement" to "definition" to better fit SQLite terminology.
+* The library now only requires a connection object for every method, removing the need for a cursor object.
 
 ### Fixed
 * NULL can now be inserted into a table by typing "NULL" (case-insensitive) in a string.
 * One-element tuples can now be inserted into a table.
+
+### Removed
+* There is no longer a list of features on the README.
 
 ## [0.1.1] - 2026-05-27
 

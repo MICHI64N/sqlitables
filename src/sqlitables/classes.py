@@ -35,33 +35,21 @@ class Table:
     def __init__(self, name: str, columns: list[Column]):
         self.name = name
         self.columns = columns
+
+    def exists(self, connection: sqlite3.Connection):
+        sql = f'SELECT name FROM sqlite_master WHERE type="table" AND name="{self.name}";'
+        find = connection.cursor().execute(sql)
+        exists = True if find.fetchone() else False
+        find.close()
+        return exists
     
-    def create(self, cursor: sqlite3.Cursor):
+    def create(self, connection: sqlite3.Connection):
         sql = f'CREATE TABLE "{self.name}"( '
         for index, column in enumerate(self.columns):
             sql += column.definition()
             if index != len(self.columns) - 1: sql += ', '
         sql += ');'
-        cursor.execute(sql)
-
-    def delete(self, where: str | None, connection: sqlite3.Connection):
-        sql = f'DELETE FROM "{self.name}"'
-        if where:
-            sql += f' WHERE {where}'
-        sql += ";"
         connection.cursor().execute(sql).close()
-        connection.commit()
-
-    def drop(self, connection: sqlite3.Connection):
-        sql = f'DROP TABLE IF EXISTS "{self.name}";'
-        connection.cursor().execute(sql).close()
-        connection.commit()
-
-    def exists(self, cursor: sqlite3.Cursor):
-        sql = f'SELECT name FROM sqlite_master WHERE type="table" AND name="{self.name}";'
-        find = cursor.execute(sql)
-        exists = True if find.fetchone() else False
-        return exists
         
     def _insert_into_columns(self, columns: list[Column]):
         sql = f'"{self.name}"('
@@ -114,7 +102,7 @@ class Table:
             sql += f'"{col.name}"' 
             if index != len(select) - 1: sql += ', '
         return sql
-    def select(self, select: list[Column] | str, where: str | None, cursor: sqlite3.Cursor):
+    def select(self, select: list[Column] | str, where: str | None, connection: sqlite3.Connection):
         # SELECT [select]
         sql = 'SELECT '
         if type(select) == str:
@@ -128,8 +116,10 @@ class Table:
             sql += f' WHERE {where}'
         sql += ";"
         # Selection
-        selection = cursor.execute(sql)
-        return selection.fetchall()
+        selection = connection.cursor().execute(sql)
+        result = selection.fetchall()
+        selection.close()
+        return result
 
     def update(self, set: str, where: str | None, connection: sqlite3.Connection):
         sql = f'UPDATE "{self.name}" SET '
@@ -137,5 +127,18 @@ class Table:
         if where:
             sql += f' WHERE {where}'
         sql += ";"
+        connection.cursor().execute(sql).close()
+        connection.commit()
+
+    def delete(self, where: str | None, connection: sqlite3.Connection):
+        sql = f'DELETE FROM "{self.name}"'
+        if where:
+            sql += f' WHERE {where}'
+        sql += ";"
+        connection.cursor().execute(sql).close()
+        connection.commit()
+
+    def drop(self, connection: sqlite3.Connection):
+        sql = f'DROP TABLE IF EXISTS "{self.name}";'
         connection.cursor().execute(sql).close()
         connection.commit()
