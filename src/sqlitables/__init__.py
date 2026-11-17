@@ -1,1 +1,1 @@
-from sqlitables import classes, connection
+from sqlitables import connection, table
