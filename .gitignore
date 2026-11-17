@@ -3,3 +3,11 @@
 
 # Cache
 __pycache__
+.pytest_cache
+
+# Generated doc files
+docs/build
+**_autosummary
+
+# Environment
+.venv
