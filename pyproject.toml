@@ -8,7 +8,7 @@ version = "0.1.1"
 requires-python = ">=3.11"
 authors = [{name = "Samantha Bales", email = "samanthabales2006@gmail.com"}]
 description = "Create and maintain SQLite databases more efficiently using object-oriented concepts"
-readme = "README.md"
+readme = "README.rst"
 license = "MIT"
 license-files = ["LICENSE"]
 keywords = ["sql", "sqlite", "database", "classes", "object-oriented", "oop"]
@@ -21,6 +21,10 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules"
 ]
 
+[dependency-groups]
+docs = ["sphinx", "furo", "sphinx-remove-toctrees"]
+
 [project.urls]
 Repository = "https://github.com/MICHI64N/sqlitables"
-Changelog = "https://github.com/MICHI64N/sqlitables/blob/main/CHANGELOG.md"
+Changelog = "https://github.com/MICHI64N/sqlitables/blob/main/CHANGELOG.rst"
+Homepage = "https://michi64n.github.io/sqlitables/"

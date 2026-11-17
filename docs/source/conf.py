@@ -21,7 +21,6 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.napoleon',
     'sphinx.ext.intersphinx',
-    'myst_parser',
     'sphinx_remove_toctrees',
 ]
 
@@ -42,6 +41,8 @@ def skip_module_classes(app, what, name, obj, skip, options):
     if what == "module" and inspect.isclass(obj):
         return True
     if what == "module" and inspect.isfunction(obj):
+        return True
+    if what == "class" and inspect.isfunction(obj):
         return True
     if name == "__init__":
         return True

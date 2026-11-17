@@ -5,7 +5,7 @@ Attributes:
         Datatype affinities in SQLite.
 """
 
-import sqlite3 # I will need this again later...
+import sqlite3 # I will need this again later.
 from typing import Literal, get_args
 
 DATATYPE = Literal["BLOB", "INTEGER", "NUMERIC", "REAL", "TEXT"]
@@ -36,7 +36,12 @@ class Column:
         return definition
 
 class Table:
-    """Represents tables used in SQLite."""
+    """Represents tables used in SQLite.
+    
+    Attributes:
+        name (str): Name of the table.
+        columns (list(:obj:`Column`)): Columns in the table.
+    """
     def __init__(self, name: str, columns: list[Column]):
         self.name = name
         self.columns = columns

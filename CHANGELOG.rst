@@ -17,6 +17,7 @@ Changed
 * Renamed column method "statement" to property "definition" to better fit SQLite terminology.
 * The docs/ folder now contains a Sphinx website.
 * README and CHANGELOG now use reStructuredText to go along with the Sphinx website.
+* Renamed "classes.py" to "table.py" since there are going to be more classes.
 
 Removed
 ^^^^^^^

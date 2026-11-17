@@ -1,9 +1,3 @@
-.. SQLiTables Documentation
-.. ========================
-
-.. SQLiTables is a Python library for managing SQLite databases with object-oriented concepts.
-.. It is built on top of standard Python module :any:`python:sqlite3` with no third-party
-.. dependencies for ease of use.
 .. include:: ../../README.rst
 
 .. toctree:: 
