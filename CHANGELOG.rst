@@ -23,8 +23,9 @@ Removed
 ^^^^^^^
 * There is no longer a list of features on the README.
 
-`0.1.1`_ - 2026-05-27
----------------------
+`0.1.1`_ - 2026-05-27 [YANKED]
+------------------------------
+Yank reason: SQL injection vulnerabilities
 
 Added
 ^^^^^
@@ -39,8 +40,9 @@ Fixed
 ^^^^^
 * Added quotes around the table name statements in the `classes.Table.select() <https://github.com/MICHI64N/sqlitables/blob/v0.1.1/docs/reference.md#selectself-select-where-cursor>`_ method.
 
-`0.1.0`_ - 2026-05-25
----------------------
+`0.1.0`_ - 2026-05-25 [YANKED]
+------------------------------
+Yank reason: SQL injection vulnerabilities
 
 Added
 ^^^^^
